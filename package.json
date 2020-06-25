@@ -1,0 +1,13 @@
+{
+  "name": "docker-buildx-action",
+  "version": "1.0.0",
+  "description": "Builds and publish docker image using buildx",
+  "main": "index.js",
+  "repository": "https://github.com/AlejandroAM91/docker-buildx-action.git",
+  "author": "Alejandro Alonso Mayo <alejandroalonsomayo@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/exec": "^1.0.4"
+  }
+}

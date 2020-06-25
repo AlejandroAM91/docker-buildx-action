@@ -1,0 +1,37 @@
+name: "Docker Buildx"
+author: AlejandroAM91
+description: "Builds and publish docker image using buildx"
+branding:
+  icon: package
+  color: blue
+inputs:
+  username:
+    description: Username used to log in to a Docker registry. If not set then no login will occur
+    required: false
+  password:
+    description: Password or personal access token used to log in to a Docker registry. If not set then no login will occur
+    required: false
+  repository:
+    description: Docker repository to tag the image with
+    required: true
+  tags:
+    description: Comma-delimited list of tags. These will be added to the registry/repository to form the image's tags
+    required: false
+  tag_with_ref:
+    description: Automatically tags the built image with the git reference as per the readme
+    required: false
+    default: "false"
+  dockerfile:
+    description: Path to the Dockerfile (Default is '{path}/Dockerfile')
+    required: false
+  platform:
+    description: "Platforms (comma separated) that should be used to build the image"
+    default: "linux/amd64,linux/arm64,linux/arm/v7"
+    required: false
+  push:
+    description: Whether to push the image
+    required: false
+    default: "true"
+runs:
+  using: 'node12'
+  main: 'index.js'
