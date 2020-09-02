@@ -32,8 +32,11 @@ inputs:
     description: "Whether to push the image"
     required: false
     default: "true"
-  cache:
-    description: "Sets build cache"
+  cache_from:
+    description: "Sets build cache from config"
+    required: false
+  cache_to:
+    description: "Sets build cache from config"
     required: false
 runs:
   using: 'node12'

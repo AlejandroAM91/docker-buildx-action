@@ -18,10 +18,15 @@ async function main() {
 
 async function build(input) {
   let params = ['buildx', 'build'];
-  if (input.cache !== '') {
-    params.push('--cache-from', input.cache);
-    params.push('--cache-to', input.cache);
+
+  if (input.cache_from !== '') {
+    params.push('--cache-from', input.cache_from);
   }
+
+  if (input.cache_to !== '') {
+    params.push('--cache-to', input.cache_to);
+  }
+
   if (input.dockerfile !== '') {
     params.push('-f', input.dockerfile);
   }
@@ -68,7 +73,8 @@ async function setup() {
 
 function getInput() {
   return {
-    cache: core.getInput('cache'),
+    cache_from: core.getInput('cache_from'),
+    cache_to: core.getInput('cache_to'),
     dockerfile: core.getInput('dockerfile'),
     platform: core.getInput('platform'),
     password: core.getInput('password'),
