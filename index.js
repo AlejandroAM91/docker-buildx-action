@@ -6,7 +6,6 @@ main();
 async function main() {
   try {
     const input = getInput();
-    console.log(input);
     await setup();
     if (input.push) {
       await login(input);
@@ -19,6 +18,10 @@ async function main() {
 
 async function build(input) {
   let params = ['buildx', 'build'];
+  if (input.cache !== '') {
+    params.push('--cache-from', input.cache);
+    params.push('--cache-to', input.cache);
+  }
   if (input.dockerfile !== '') {
     params.push('-f', input.dockerfile);
   }
@@ -65,6 +68,7 @@ async function setup() {
 
 function getInput() {
   return {
+    cache: core.getInput('cache'),
     dockerfile: core.getInput('dockerfile'),
     platform: core.getInput('platform'),
     password: core.getInput('password'),

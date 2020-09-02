@@ -6,32 +6,35 @@ branding:
   color: blue
 inputs:
   username:
-    description: Username used to log in to a Docker registry. If not set then no login will occur
+    description: "Username used to log in to a Docker registry. If not set then no login will occur"
     required: false
   password:
-    description: Password or personal access token used to log in to a Docker registry. If not set then no login will occur
+    description: "Password or personal access token used to log in to a Docker registry. If not set then no login will occur"
     required: false
   repository:
-    description: Docker repository to tag the image with
+    description: "Docker repository to tag the image with"
     required: true
   tags:
-    description: Comma-delimited list of tags. These will be added to the registry/repository to form the image's tags
+    description: "Comma-delimited list of tags. These will be added to the registry/repository to form the image's tags"
     required: false
   tag_with_ref:
-    description: Automatically tags the built image with the git reference as per the readme
+    description: "Automatically tags the built image with the git reference (Default is '{path}/Dockerfile')"
     required: false
     default: "false"
   dockerfile:
-    description: Path to the Dockerfile (Default is '{path}/Dockerfile')
+    description: "Path to the Dockerfile (Default is '{path}/Dockerfile')"
     required: false
   platform:
-    description: "Platforms (comma separated) that should be used to build the image"
+    description: "Platforms (comma separated) that should be used to build the image (Default are 'linux/amd64,linux/arm64,linux/arm/v7')"
     default: "linux/amd64,linux/arm64,linux/arm/v7"
     required: false
   push:
-    description: Whether to push the image
+    description: "Whether to push the image"
     required: false
     default: "true"
+  cache:
+    description: "Sets build cache"
+    required: false
 runs:
   using: 'node12'
   main: 'index.js'
