@@ -7,7 +7,7 @@ async function main() {
   try {
     const input = getInput();
     await setup();
-    if (input.push) {
+    if (input.username !== '') {
       await login(input);
     }
     await build(input);
