@@ -39,7 +39,7 @@ async function build(input) {
   if (input.push) {
     params.push('--push');
   } else {
-    params.push('--local');
+    params.push('--load');
   }
   params.push('.');
   try {
