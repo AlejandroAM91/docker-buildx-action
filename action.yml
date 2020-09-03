@@ -32,6 +32,9 @@ inputs:
     description: "Whether to push the image"
     required: false
     default: "true"
+  target:
+    description: "Dockerfile step to build"
+    required: false
   cache_from:
     description: "Sets build cache from config"
     required: false

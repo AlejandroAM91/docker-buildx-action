@@ -19,6 +19,28 @@ async function main() {
 async function build(input) {
   let params = ['buildx', 'build'];
 
+  if (input.dockerfile !== '') {
+    params.push('-f', input.dockerfile);
+  }
+
+  params.push('--platform', input.platform);
+
+  if (input.repository !== '') {
+    input.tags.split(',')
+      .map(tag => `${input.repository}:${tag.trim()}`)
+      .forEach(img => params.push('-t', img));
+  }
+
+  if (input.push) {
+    params.push('--push');
+  } else {
+    params.push('--load');
+  }
+
+  if (input.target !== '') {
+    params.push('--target', input.target);
+  }
+
   if (input.cache_from !== '') {
     params.push('--cache-from', input.cache_from);
   }
@@ -26,21 +48,7 @@ async function build(input) {
   if (input.cache_to !== '') {
     params.push('--cache-to', input.cache_to);
   }
-
-  if (input.dockerfile !== '') {
-    params.push('-f', input.dockerfile);
-  }
-  params.push('--platform', input.platform);
-  if (input.repository !== '') {
-    input.tags.split(',')
-      .map(tag => `${input.repository}:${tag.trim()}`)
-      .forEach(img => params.push('-t', img));
-  }
-  if (input.push) {
-    params.push('--push');
-  } else {
-    params.push('--load');
-  }
+  
   params.push('.');
   try {
     await exec.exec('docker', params);
@@ -82,6 +90,7 @@ function getInput() {
     repository: core.getInput('repository'),
     tag_with_ref: core.getInput('tag_with_ref'),
     tags: core.getInput('tags'),
+    target: core.getInput('target'),
     username: core.getInput('username'),
   };
 }
